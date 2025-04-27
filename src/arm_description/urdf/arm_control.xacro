@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="robotarm"> 
+
+    <xacro:property name="PI" value="3.14159"/>
+
+    <ros2_control type = "system" name = "GazeboSimSystem">
+        <hardware>
+            <plugin> gz_ros2_control/GazeboSimSystem</plugin>
+        </hardware>
+        <joint name = "joint_1">
+            <command_interface name = "position">
+                <param name = "min">-${PI/2}</param>
+                <param name = "max">${PI/2}</param>
+            </command_interface>
+            <state_interface name = "position">
+            </state_interface>
+        </joint>
+
+        <joint name = "joint_2">
+            <command_interface name = "position">
+                <param name = "min">-${PI/2}</param>
+                <param name = "max">${PI/2}</param>
+            </command_interface>
+            <state_interface name = "position">
+            </state_interface>
+        </joint>
+
+        <joint name = "joint_3">
+            <command_interface name = "position">
+                <param name = "min">-${PI/2}</param>
+                <param name = "max">${PI/2}</param>
+            </command_interface>
+            <state_interface name = "position">
+            </state_interface>
+        </joint>
+
+        <joint name = "joint_4">
+            <command_interface name = "position">
+                <param name = "min">-${PI/2}</param>
+                <param name = "max">${PI/2}</param>
+            </command_interface>
+            <state_interface name = "position">
+            </state_interface>
+        </joint>
+
+        <joint name = "joint_5">
+            <command_interface name = "position">
+                <param name = "min">-${PI/2}</param>
+                <param name = "max">0.0</param>
+            </command_interface>
+            <state_interface name = "position">
+            </state_interface>
+        </joint>
+
+        <joint name = "joint_6">
+            <param name ="mimic">joint_5</param>
+            <param name ="multiplier">-1</param>
+        </joint>
+    </ros2_control>
+</robot>
