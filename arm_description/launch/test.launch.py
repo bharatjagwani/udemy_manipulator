@@ -16,7 +16,7 @@ def generate_launch_description():
     # Launch Arguments
     model_arg = DeclareLaunchArgument(
         name="model",
-        default_value=os.path.join(arm_desc, "urdf", "arm_new.urdf.xacro"),
+        default_value=os.path.join(arm_desc, "urdf", "arm.urdf"),
         description="Absolute path to robot URDF/Xacro file"
     )
     use_sim_time = LaunchConfiguration("use_sim_time", default="True")

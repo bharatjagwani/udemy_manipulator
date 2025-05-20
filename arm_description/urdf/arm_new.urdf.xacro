@@ -1,11 +1,6 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="robotarm"> 
 
-    <xacro:arg name= "is_ignition" default = "true"/>
-
-    <xacro:include filename="$(find arm_description)/urdf/arm_gazebo.xacro" />
-    <xacro:include filename="$(find arm_description)/urdf/arm_control.xacro" />
-
     <xacro:property name="PI" value="3.14159"/>
     <xacro:property name = "effort" value = "30.0"/>
     <xacro:property name = "velocity" value = "10.0" />
@@ -198,4 +193,8 @@
         <mimic joint = "joint_5" multiplier = "-1"/>
         <limit lower = "0.0" upper = "${PI/2}" effort = "${effort}" velocity = "${velocity}"/>
     </joint>
+    
+    <xacro:include filename="$(find arm_description)/urdf/arm_control.xacro" />
+    <xacro:include filename="$(find arm_description)/urdf/arm_gazebo.xacro" />
+    
 </robot>

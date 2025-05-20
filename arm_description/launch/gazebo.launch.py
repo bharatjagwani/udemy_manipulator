@@ -1,3 +1,4 @@
+
 from launch import LaunchDescription
 from launch_ros.actions import Node
 from launch.actions import DeclareLaunchArgument, SetEnvironmentVariable, IncludeLaunchDescription
@@ -21,15 +22,10 @@ def generate_launch_description():
         name = "GZ_SIM_RESOURCE_PATH",
         value = [str(Path(arm_desc).parent.resolve())]
     )
-
-    ros_distro = os.environ["ROS_DISTRO"]
-    is_ignition = "False" if ros_distro == "humble" else "False"
-    physics_engine = "" if ros_distro == "humble" else "--physics-engine gz-physics-bullet-featherstone-plugin"
     
     robot_description = ParameterValue(Command(
         ["xacro ", 
-         LaunchConfiguration("model"),
-         " is_ignition:=", is_ignition
+         LaunchConfiguration("model")
          ]),
          value_type=str)
 
@@ -50,7 +46,6 @@ def generate_launch_description():
         package="ros_gz_sim",
         executable="create",
         arguments=["-topic","robot_description","-x", "0", "-y", "0", "-z", "0.5"],
-        # parameters=[{"/robot_description": robot_description}],
         output="screen"
     )
     gz_ros2_gazebo_bridge = Node(
@@ -78,23 +73,6 @@ def generate_launch_description():
         executable = 'spawner',
         arguments = ['gripper_controller']
     )
-
-    # # Path to the controller configuration file
-    # controller_config = os.path.join(
-    #     get_package_share_directory("arm_controller"),
-    #     "config",
-    #     "arm_controllers.yaml"
-    # )
-
-    # controller_manager = Node(
-    #     package="controller_manager",
-    #     executable="ros2_control_node",
-    #     parameters=[
-    #         {"robot_description": robot_description},
-    #         controller_config
-    #     ],
-    #     output="screen"
-    # )
 
     return LaunchDescription([
         model_arg,
